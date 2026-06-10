@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="p-6 bg-gray-300">
+    <div class="p-6 bg-blue">
+        <h3 class="text-xs font-semibold">kullanıcı sorgula</h3>
+        <div class="mb-3">
+            <input type="number" id="user-id" placeholder="kullanıcı ID(1-3)" class="p-2 border">
+        </div>
+        <button id="btn-search" class="p-2 bg-yellow-200">kullanıcı sorgula</button>
+        <div id="result" class="mt-3 p-4">sorgulama yapılmadı</div>
+    
+    </div>
+
+<script>
+    //asenkron veri sorgulama
+    const kullaniciSorgula =(id,onSuccess,onError)=>{
+        setTimeout(()=>{
+            const veriTabani={
+                1:{isim:'ali',rol:'yapay zeka uzmanı'},
+                2:{isim:'onur',rol:'IT çalısani'},
+                3:{isim:'ezgi',rol:'IT calısanı'}
+            }
+            const kullanici=veriTabani(id);
+
+            if(kullanici){
+                onSuccess(kullanici);
+            }else{
+                onError('Hata:Girilen ID('+[id]+') veri tabanında bulunamadı'); 
+            }
+        },1500)
+    }
+
+    document.getElementById('btn-search').addEventListener('click',())
+<script>
+
+
+    document.getElementById()
+<script>
+
+    document.getElementById()
+<script>
+
+
+</body>
+</html>

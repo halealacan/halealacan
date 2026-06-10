@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https:cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body class="p-6 bg-gray-100">
+    <div class="p-6 bg-white">
+        <h1 class="text-xl font-bold">giriş doğrulama</h1>
+    <div>
+        <input id="username" type="text" placeholder="kullanıcı adı (admin)" class="p-2 border">
+    </div>
+    <div class="mb-4-">
+<input type="password" id="password" placeholder="şifre (1234)" class="p-2 border">
+    </div>
+    <button id="btn-login" classİ="p-2 bg-purple-200">giriş yap</button>
+    <div id="result" class="mt-4 p-2">giriş yapınız</div>
+    </div>
+    
+
+
+    <script>
+        const girisYap=(username,password)=>{
+            return new Promise((resolve,reject)=>{
+                if(username==='admin' && password==='1234'){
+                    resolve({isim:'ali veli',rol:'yönetici',girisZamani:new Date().toLocaleDateString()})
+                }else{
+                    reject('hata:kullanıcı adı veya şifre yanlış!')
+                }
+            })
+        }
+        
+        document.getElementById('btn-login').addEventListener('click',()=>{
+            const uName=document.getElementById('username').value;
+            const uPass=document.getElementById('password').value;
+            const output=document.getElementById('result');
+
+            girisYap(uName,uPass).then((kullanici)=>{
+                output.className='mt-4 bg-green-200';
+                output.innerHTML=`<strong>giriş başarılı</strong><br>
+                İsim:${kullanici.isim}<br>
+                Rol:${kullanici.rol}<br>
+                Giriş Zamanı:${kullanici.girisZamani}<br>`;
+            }).catch((hataMesaji)=>{
+                output.className='mt-4 bg-red-200';
+                output.innerText=hataMesaji;
+            })
+        })
+
+    </script>
+
+
+
+</body>
+</html>

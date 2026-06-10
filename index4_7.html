@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+
+<body class="p-6 bg-gray-200">
+<div class="p-6 bg-white">
+    <h1 class="text-xl font-bold">e-ticaret sepet</h1>
+    <div class="p-4 border">
+        <h2 class="text"></h2>
+
+
+
+<div class="p-4 border">
+    <h2>alışveriş sepetim</h2>
+    <ul>
+        <li>
+            sepetiniz boş
+        </li>
+    </ul>
+    <div class="mt-2 font-bold">
+        toplam tutar:
+
+    </div>
+</div>
+</div>
+    
+<script>
+    const yedekUrunler=[
+        {"id":1,"title":'akıllı telefon','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":2,"title":'ceket','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":3,"title":'kuru fasulye','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":4,"title":'gömlek','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":5,"title":'saat','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":6,"title":'bilgisayar','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":7,"title":'sapka','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":8,"title":'pilav','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":9,"title":'köfte ızgara','kategori':'elektronik','fiyat':'1500','stok':5},
+        {"id":10,"title":'spor ayakkabı','kategori':'elektronik','fiyat':'1500','stok':5},
+    ]
+
+    let sepet = [];
+
+    const urunleriSorgula=async()=>{
+        const searchVal=document.getElementById('search-input').value.toLowerCase();
+        const listDiv=document.getElementById('product-list');
+        const status=document.getElementById('status');
+
+        status.innerText="ürünler listeleniyor...";
+        status.className='p-2 border';
+
+        let urunler=[];
+
+        try{
+            const response = await axios.get('https://kodusta.com/api/urunler.json');
+            urunler=response.data;
+        }catch(hata){
+            console.warn('cors hatası veya bgakantı hatası');
+            urunler=yedekUrunler;
+
+        }
+        const filtrelenmis=urunler.filter(u=>title.toLowerCase().includes(searchVal));
+
+        listDiv.innerHTML="";
+        if(filtrelenmis.length===0){
+            listDiv.innerHTML='<p class="p-2 text-red-500">urun ublunamadı</p>';
+            return;
+        }
+
+        filtrelenmis.forEach(urun => {
+            const itemDiv=document.createElement('div');
+            itemDiv.className=
+            
+        });
+    }
+</script>
+
+
+
+
+</body>
+</html>

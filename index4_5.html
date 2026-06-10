@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https:cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <title>Document</title>
+</head>
+<body class="p-6 bg-gray-100">
+    <div class="p-6 bg-white">
+        <h1 class="text-xl font-bold">Async / Await</h1>
+        <button id="btn-run" class="p-2 bg-pink-200">siparişi getir</button>
+        <div id="result" class="mt-4 whitespace-pre-line">işlem bekleniyor...</div>
+    </div>
+    <script>
+        const kullaniciyiGetir = ()=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>resolve({sahip:kullanici.ad,urunler:['cep telefonu','macbook']}),1000);
+            })
+        }
+        const sepetiGetir =(kullanici)=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>resolve({sahşp:kullanici.ad,urunler:['cep telefonu','macbook']}),2000)
+            })
+        }
+
+        const faturaHesapla=(sepet)=>{
+            return new Promise((resolve)=>{
+            setTimeout(()=>resolve(`müşteri:${sepet.sahip}\nürünler:${sepet.uurnler.join(', ')}\nfatura tutarı 2500 tl`),1000);
+        })
+        }
+
+         const siparisSureciniYonet=async()=>{
+            const output=document.getElementById('result');
+            output.innerText='süreç başlatıldı...';
+
+            const kullanici=await kullaniciyiGetir();
+            output.innerText=`kullanıcı alındı:${kullanici.ad}\nsepet yğkleniyor...`;
+
+            const sepet=await sepetiGetir(kullanici);
+            output.innerText=`sepet alındı:${sepet.urunler.join(', ')}\nfatura çıkarılıyor...`;
+
+            const fatura=await faturaHesapla(sepet);
+            output.innerText=fatura;
+        }
+        document.getElementById('btn-run').addEventListener('click',siparisSureciniYonet)
+    </script>
+    
+</body>
+</html>

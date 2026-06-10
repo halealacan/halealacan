@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https:cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <title>Document</title>
+</head>
+<body class="p-6 bg-gray-100">
+    <div class="p-6 bg-white">
+        <h1 class="text-xl font-bold">veri akışı zincirleme</h1>
+        <button id="btn-start" class="bg-green-200">siparişi detaylandır</button>
+        <div id="result" class="mt-4 whitespace-pre-line">işlem başarılı</div>
+    </div>
+    
+
+    <script>
+
+        const kullaniciyiGetir=()=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    resolve({id:42,ad:'hale',uyelik:'standart'})
+                },2000)
+            })
+        }
+
+        const sepetiGetir=(kullanici)=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    resolve({
+                        sahip:kullanici.ad,
+                        urunler:['akıllı saat','rimel']
+                    })
+                },1000)
+            })
+        }
+
+        const faturaHesapla=(sepet)=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    resolve(`müşteri:${sepet.sahip}\nürünler: ${sepet.urunler.join(', ')}\nFatura tutarı 2350 tl (kargo bedava)`)
+                },2000)
+            })
+        }
+
+        document.getElementById('btn-start').addEventListener('click',()=>{
+            const output=document.getElementById('result');
+            output.innerText='müşteri sorgulanyor...';
+
+            kullaniciyiGetir().then((kullanici)=>{
+                output.innerText=`müşteri bulunud: ${kullanici.ad}\nsepet aranıyor...`;
+                return sepetiGetir(kullanici);
+            }).then((sepet)=>{
+                output.innerText=`sepet alındı:${sepet.urunler.join(',')}\nfatura hesaplanıyor....`;
+                return faturaHesapla(sepet);
+            }).then((faturaOzeti)=>{
+                output.innerText=faturaOzeti;
+            })
+        })
+
+    </script>
+</body>
+</html>
