@@ -15,7 +15,7 @@ const DynamicFormFields = () => {
   const yetenekSil = (id) => {
 
     if (yetenekler.length === 1) {
-      alert("En az bir yetenek alanı bulunmalıdır.");
+      alert("En az bir yetenek alanı bulunmalıdır!");
       return;
     }
     setYetenekler(yetenekler.filter(y => y.id !== id));
