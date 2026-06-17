@@ -1,45 +1,50 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
+// useState bir bilgiyi hafızada tutar,
+// useEffect sayfa açılınca yapılacak işlemleri yapar 
+// useMemo hesaplanmıs sonnucları saklar mesela ürün filtreledin , stok güncelledin vb.
+// useCallback fonksiyonalrı hafızada tutar 
 import Baslik from "./components/Baslik";
 import KampanyaBanner from "./components/KampanyaBanner";
 import UrunListesi from "./components/UrunListesi";
 import UrunDetayi from "./components/UrunDetayi";
 import SepetGezgini from "./components/SepetGezgini";
 
-export default function App() {
-  const [products, setProducts] = useState([]);
+export default function App() { 
+  const [products, setProducts] = useState([]); // baslangıcta bos jsondan yüklenecek ,  products mevcut değer setproducts ise degeri degiştiren func.
   const [sepet, setSepet] = useState([]);
   const [sepetAcik, setSepetAcik] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); //ürünler yükleniyor mu
   const [error, setError] = useState(null);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [currentCategory, setCurrentCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetch("/urunler.json")
-      .then((res) => {
-        if (!res.ok) {
+    fetch("/urunler.json") //urunler.jsona git ve ürünleri getir
+      .then((res) => { //res: sunucuudan gelen cevap
+        if (!res.ok) { // urunler düzgün gelmediyse hata olusur
           throw new Error(`Katalog yüklenemedi. Sunucu hata kodu: ${res.status}`);
         }
-        return res.json();
+        return res.json(); //gelen cevabı json formatına cevirir , Çünkü urunler.json dosyası düz yazı gibi gelir bunu jsnin anlayacağı dizi ya da obje haline çevirmek gerekir
       })
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
+      .then((data) => { //ürünler basarıyla geliri ise 
+        setProducts(data); // ürünleri product içine koyar
+        setLoading(false); //yüklenme bitti der
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, []); // [] bu useeffecte sayfa iilk açıldıgında sadece 1 kere çalıs demek
+  //useEffect sayfa ilk açılınca calsıır
 
-  const displayProducts = useMemo(() => {
-    const filtered = currentCategory === "all"
-      ? products
+  const displayProducts = useMemo(() => { //ekranda gösterilcek ürünleri hazırlar
+    const filtered = currentCategory === "all" //eger secilen kategory all ise productların hepsini göster
+      ? products // saglanıyorsa (if) ? calısır sağlanmıyorsa : calsıır
       : products.filter((item) => item.kategori === currentCategory);
 
-    return filtered.map((item) => {
-      const sepetUrun = sepet.find((c) => c.id === item.id);
+    return filtered.map((item) => { // map listedeki her ürünü tek tek dolaşır ve yeni bir liste oluşturur
+      const sepetUrun = sepet.find((c) => c.id === item.id); //sepette bu urun var mı bakar 
       const sepetAdet = sepetUrun ? sepetUrun.adet : 0;
       return {
         ...item,
