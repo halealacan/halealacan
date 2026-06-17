@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard"
 
 // ProductGrid bileşenini dışa aktarır.
 // App.js'ten gelen products dizisini alır.
-export default function ProductGrid({ products }) {
+export default function ProductGrid({ products, onAddToCart }) {
 
     return (
         <>
@@ -22,6 +22,8 @@ export default function ProductGrid({ products }) {
 
                     // Ürünün tamamı ProductCard'a gönderilir
                     product={product}
+
+                    onAddCart={onAddToCart}
                 />
 
             ))}

@@ -6,7 +6,8 @@ export default function Header({
   handleSearchSubmit,     // Arama formu gönderildiğinde çalışan fonksiyon
   setSelectedCategory,    // Seçili kategoriyi değiştiren fonksiyon
   setSearchQuery,         // Aranacak sorguyu değiştiren fonksiyon
-  setView                 // Görüntülenecek sayfayı değiştiren fonksiyon
+  setView,
+  cart               // Görüntülenecek sayfayı değiştiren fonksiyon
 }) {
   
   // Logoya tıklanınca çalışacak fonksiyon
@@ -87,14 +88,18 @@ export default function Header({
             </div>
 
             {/* Sepet alanı */}
-            <div className="action-item">
+            <div 
+              className="action-item"
+              onClick={() => setView('cart')}
+            >
+
 
               {/* Sepet yazısı */}
               <span>Sepetim</span>
 
               {/* Sepetteki ürün sayısını gösteren rozet */}
               {/* Şu an sabit olarak 0 yazıyor */}
-              <span className="badge">0</span>
+              <span className="badge">{cart.length}</span>
             </div>
 
           </div>

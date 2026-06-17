@@ -1,6 +1,8 @@
 // Header bileşenini içe aktarır
 import Header from "./components/Header";
 
+import CartPage from "./components/CartPage";
+
 // Navbar bileşenini içe aktarır
 import Navbar from "./components/Navbar";
 
@@ -41,6 +43,8 @@ function App() {
   // Arama inputunun içinde yazan değeri tutar
   const [searchInput,setSearchInput]=useState("");
 
+  const [cart,setCart]=useState([]);
+
     // Yeni ürün ekleme fonksiyonu
     const handleAddProduct=(data)=>{
 
@@ -61,7 +65,26 @@ function App() {
     setProducts([newProduct,...products]);
   }
 
+const handleAddToCart=(product)=>{
+  const existingProduct = cart.find(
+    (item)=>item.id === product.id
+  );
 
+  if(existingProduct){
+    setCart(
+      cart.map((item)=>
+        item.id === product.id
+        ? {...item,quantity:item.quantity+1}
+        : item
+      )
+    );
+  }else{
+    setCart([
+      ...cart,
+      {...product,quantity:1}
+    ]);
+  }
+}
 
 
   // Ürünleri kategoriye ve arama kelimesine göre filtreler
@@ -99,6 +122,7 @@ const handleSearchSubmit=(e)=>{
       setSearchQuery={setSearchQuery}
       setSelectedCategory={setSelectedCategory} 
       setView={setView}
+      cart={cart}
       />
 
       {/* Navbar'a kategori bilgileri ve kategori değiştirme fonksiyonu gönderilir */}
@@ -138,19 +162,26 @@ const handleSearchSubmit=(e)=>{
           ):(  
 
           // Ürün varsa ProductGrid'e filtrelenmiş ürünler gönderilir
-          <ProducutGrid products={filteredProducts}/>
+          <ProducutGrid products={filteredProducts}
+          onAddToCart={handleAddToCart}/>
           )}
 
         </div>
       </main>
 
-      ):(
+      ): view === "addProduct" ? (
 
       // Eğer view home değilse yeni ürün ekleme formu gösterilir
       <AddProductForm  categories={MOCK_CATEGORIES}
       setView={setView} onAddProduct={handleAddProduct}
        />
-      )
+      ) : view === "cart" ? (
+    <CartPage
+    cart={cart}
+    setCart={setCart}
+    setView={setView}
+  />
+) : null
       }
 
       {/* Sayfanın en altında footer gösterilir */}
