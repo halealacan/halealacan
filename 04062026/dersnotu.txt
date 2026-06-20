@@ -1,0 +1,107 @@
+TEMEL WEB GELİŞTİRME VE TARAYICI ARAÇLARI DERS NOTLARI
+
+=========================================
+SABAH BÖLÜMÜ: IDE KURULUMU, EKLENTİLER VE GELİŞTİRİCİ ARAÇLARINA GİRİŞ
+=========================================
+
+1. MODERN GELİŞTİRME ORTAMI (IDE) VE VS CODE
+Bir frontend geliştiricinin en önemli aracı Visual Studio Code (VS Code) editörüdür. 
+Ders kapsamında kurulan ve yapılandırılan temel araçlar:
+- Live Server: Yazılan HTML/CSS/JS kodlarının tarayıcıda anlık olarak güncellenmesini (Hot Reload) sağlar.
+- Prettier: Kodların endüstri standartlarında otomatik olarak biçimlendirilmesini sağlar.
+- Emmet: HTML ve CSS kodlarını kısayollarla çok daha hızlı yazmamızı sağlayan gömülü araçtır.
+
+
+2. TARAYICI GELİŞTİRİCİ ARAÇLARI (DEVTOOLS) NEDİR?
+Tarayıcıların içinde yer alan, kodlarımızı denetlememizi, hata ayıklamamızı ve performansı analiz etmemizi sağlayan paneldir.
+- Elements Paneli: DOM (Document Object Model) yapısını canlı incelemek ve CSS stillerini anlık değiştirmek için kullanılır.
+- Console Paneli: JavaScript çıktılarını (`console.log`) görmek, hataları incelemek ve canlı JS komutları çalıştırmak için kullanılır.
+- Network Paneli: Sayfa yüklenirken yapılan tüm ağ isteklerini (görseller, API'ler, CSS'ler) izlemek için kullanılır.
+
+
+=========================================
+ÖĞLEDEN SONRA BÖLÜMÜ: DEVTOOLS İLE HATA AYIKLAMA VE DOM ETKİLEŞİMLERİ
+=========================================
+
+1. DOM (DOCUMENT OBJECT MODEL) VE ELEMENT SEÇİMİ
+JavaScript ile HTML elementlerine erişmek ve onları manipüle etmek için DOM API kullanılır.
+En temel seçim fonksiyonu:
+const element = document.getElementById("elementId");
+Bu fonksiyon, belirtilen benzersiz kimliğe (ID) sahip HTML etiketini bir JavaScript nesnesi olarak belleğe yükler.
+
+
+2. OLAY DİNLEYİCİLERİ (EVENT LISTENERS) VE TEXT MANİPÜLASYONU
+Kullanıcı etkileşimlerini (tıklama, klavye tuşu, form gönderme) yakalamak için olay dinleyicileri eklenir:
+element.addEventListener("click", function(event) {
+    // Tıklanınca çalışacak kodlar
+});
+Elementlerin içeriğindeki metni değiştirmek için ise `textContent` özelliği kullanılır:
+element.textContent = "Yeni Yazı İçeriği";
+
+
+3. KOŞULLU DURUM VE SAYAÇ YÖNETİMİ
+Bileşenlerin durumunu izlemek için sayaç değişkenleri (`let sayac = 0`) tanımlanır. Modulo (`%`) operatörü kullanılarak tıklama sayısının tek veya çift olma durumu tespit edilerek iki farklı durum arasında geçiş yapılması sağlanır:
+if (sayac % 2 === 0) {
+    yazi.textContent = "Durum A";
+} else {
+    yazi.textContent = "Durum B";
+}
+
+
+4. FORMLAR VE FİLEREADER APİ İLE GÖRSEL ÖNİZLEME
+Form gönderildiğinde sayfanın yenilenmesini engellemek için `e.preventDefault()` fonksiyonu çağrılır. 
+Kullanıcının yüklediği dosyaları tarayıcı belleğinde okumak için `FileReader` API kullanılır:
+const reader = new FileReader();
+reader.onload = function(olay) {
+    imgElement.src = olay.target.result; // Resmi base64 formatında src'ye ata
+};
+reader.readAsDataURL(dosya);
+
+
+=========================================
+ÖZET TABLO: HANGİ KAVRAM NE İŞE YARAR?
+=========================================
+
+1. GELİŞTİRME ARAÇLARI:
+- Live Server            : Tarayıcıyı kod değişikliklerinde otomatik yenileyen VS Code eklentisi.
+- Elements Tab (DevTools): DOM ağacını ve CSS stillerini canlı düzenleme alanı.
+- Console Tab (DevTools) : Hata mesajları ve JavaScript kod deneme paneli.
+
+2. DOM VE JAVASCRIPT ETKİLEŞİMİ:
+- getElementById()       : Belirtilen kimliğe (ID) sahip HTML etiketini seçen fonksiyon.
+- addEventListener()     : Elementlere tıklama, form gönderme gibi olayları bağlayan fonksiyon.
+- textContent            : Seçilen elementin içerisindeki düz metni okuma ve yazma özelliği.
+- e.preventDefault()     : Formların varsayılan sayfa yenileme davranışını durduran fonksiyon.
+- FileReader             : Kullanıcının yerel dosyalarını JavaScript ile asenkron okuma sınıfı.
+
+=========================================
+TEMEL UYGULAMA VE PRATİK KAZANIMLARI
+=========================================
+
+1. DOĞMA VE İLK KURULUM AŞAMASI:
+- VS Code ortamı kuruldu, tarayıcı DevTools paneli açılma kısayolları (F12 / Cmd+Opt+I) öğrenildi.
+- Basit bir HTML şablonu oluşturulup Live Server ile ayağa kaldırıldı.
+
+2. ETKİLEŞİM VE MANİPÜLASYON AŞAMASI:
+- Butonlara tıklandığında metinlerin dinamik olarak değişmesi sağlandı (`index.html`).
+- Tıklama sayısına bağlı olarak metnin farklı şekillerde güncellenmesi sağlandı (`index1.html`, `index2.html`).
+
+3. FORM VE DOSYA YÖNETİMİ AŞAMASI:
+- Bir kullanıcı kayıt formu tasarlanıp isim, soyisim ve telefon bilgileri DOM'a yazdırıldı.
+- Görsel dosyası seçildiğinde `FileReader` aracılığıyla sayfa yenilenmeden anlık önizleme resmi oluşturuldu (`index3.html`).
+
+=========================================
+PROJEDE KULLANILAN METOT VE API'LERİN AÇIKLAMALARI
+=========================================
+
+- **document.getElementById:** Belirtilen ID'deki HTML öğesini JS nesnesine dönüştürür.
+  *Kullanımı:* Buton ve metin kutularını JS tarafında kontrol etmek için seçer.
+
+- **addEventListener:** Öğeye belirli bir etkileşim olayı (event) tanımlar.
+  *Kullanımı:* `click` ve `submit` olaylarında fonksiyonları tetikler.
+
+- **FileReader:** Dosya okuma işlemlerini gerçekleştiren asenkron JavaScript sınıfıdır.
+  *Kullanımı:* Yüklenen resmin base64 URL çıktısını alıp önizleme resmine atar.
+
+- **e.preventDefault:** Event tetiklendiğinde tarayıcının varsayılan hareketini (örneğin sayfa yenileme) engeller.
+  *Kullanımı:* Form gönderiminde sayfanın yenilenmesini engelleyerek verilerin DOM'da kalmasını sağlar.

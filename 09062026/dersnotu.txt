@@ -1,0 +1,96 @@
+MODERN JAVASCRIPT (ES6+) DERS NOTLARI
+
+=========================================
+SABAH BÖLÜMÜ: ES6+ DEĞİŞKENLER VE FONKSİYON YAPILARI
+=========================================
+
+1. DEĞİŞKEN TANIMLAMA (LET, CONST VE VAR FARKLARI)
+JavaScript'in ES6 versiyonuyla gelen modern değişken tanımlama yöntemlerinin farkları:
+- `var`  : Function-scoped'dur. Block-scoped değildir. Tanımlandığı fonksiyonun her yerinden erişilebilir. `Hoisting` özelliğine sahiptir (değişken bildirilmeden önce kullanılabilir).
+- `let`  : Block-scoped'dur (yalnızca süslü parantez `{}` içi). Yeniden tanımlanamaz ancak değeri değiştirilebilir (`re-assignable`).
+- `const`: Block-scoped'dur. Değeri atandıktan sonra değiştirilemez (sabit). Nesnelerin ve dizilerin kendisi sabit kalmakla birlikte içindeki elemanlar değiştirilebilir.
+
+
+2. OK FONKSİYONLARI (ARROW FUNCTIONS) VE "THIS" BAĞLAMI
+Klasik fonksiyonlar (`function() {}`) ile Arrow fonksiyonların (`() => {}`) temel farkı `this` kelimesinin bağlamıdır (context):
+- Klasik Fonksiyonlar: Kendi `this` bağlamlarını oluştururlar. Örneğin bir zamanlayıcı (`setInterval`) içinde çağrıldıklarında `this` pencere nesnesini (`window`) gösterir. Bu durum sınıflarda `NaN` veya tanımsız hatalara yol açar.
+- Arrow Fonksiyonlar: Kendi `this` bağlamlarını oluşturmazlar. Tanımlandıkları dış kapsamın (lexical scope) `this` değerini miras alırlar. Zamanlayıcılar ve olay dinleyicileri içinde son derece güvenlidir.
+
+
+3. NESNE ÖZELLİKLERİ VE DESTRUCTURING (YAPISAL PARÇALAMA)
+- Shorthand Properties: Değişken adı ile nesnenin anahtar adı aynıysa tek kelimeyle tanımlanabilir:
+  const ad = "Telefon"; const urun = { ad }; // ad: ad yerine
+- Nesne Parçalama (Destructuring): Nesnelerin içindeki değerleri kolayca değişkenlere çıkarmayı sağlar.
+  const { marka, fiyat: urunFiyati } = urun; (Burada `fiyat` değeri `urunFiyati` takma adıyla (alias) çıkartılmıştır).
+
+
+=========================================
+ÖĞLEDEN SONRA BÖLÜMÜ: REST/SPREAD OPERATÖRLERİ VE DİZİ METOTLARI
+=========================================
+
+1. SPREAD OPERATÖRÜ (...) VE REFERANS KOPYALAMA TEHLİKESİ
+JavaScript'te diziler ve nesneler referans tiplidir. Bir diziyi doğrudan eşitlerseniz (`dizi2 = dizi1`), bellekteki aynı yeri gösterirler. Birini değiştirmek diğerini de değiştirir.
+Bunun önüne geçmek için Spread operatörü (`...`) ile dizi elemanları açılarak yeni bir diziye kopyalanır (Deep Copy / Value Copy):
+const yeniDizi = [...eskiDizi]; // Güvenli kopyalama
+
+
+2. REST PARAMETRESİ (...) VE DİNAMİK ARGÜMANLAR
+Fonksiyonlara gönderilen parametrelerin sayısını bilmediğimiz durumlarda parametreleri bir dizi altında toplamak için Rest parametresi kullanılır:
+const topla = (...sayilar) => sayilar.reduce((a, b) => a + b, 0);
+Ayrıca dizi parçalama yaparken de kalan tüm elemanları bir alt diziye toplamak için tercih edilir:
+const [ilk, ikinci, ...kalanlar] = dizi;
+
+
+3. MAP() VE FILTER() DİZİ METOTLARI İLE DOM ETKİLEŞİMİ
+- `map()`   : Mevcut dizideki her elemanı dönüştürerek aynı uzunlukta yeni bir dizi döner.
+- `filter()`: Belirtilen koşulu sağlayan (true dönen) elemanları süzerek yeni bir dizi oluşturur.
+*Uygulama:* Kullanıcının girdiği arama kelimesine ve maksimum fiyat limitine göre ürünler `filter` ile süzülür, ardından süzülen ürünler `map` metodu ile HTML şablonuna dönüştürülerek DOM'a basılır.
+
+
+=========================================
+ÖZET TABLO: HANGİ KAVRAM NE İŞE YARAR?
+=========================================
+
+1. DEĞİŞKENLER VE KAPSAMLAR:
+- Block Scope            : Yalnızca tanımlandığı süslü parantez `{}` içinde erişilebilen kapsam (let/const).
+- Hoisting               : Değişkenlerin ve fonksiyon bildirimlerinin kapsamın en üstüne taşınması (var).
+- Destructuring          : Dizi veya nesne içindeki alanları hızlıca bağımsız değişkenlere dönüştürme.
+
+2. ES6 OPERATÖRLERİ VE METOTLAR:
+- Spread Operatörü (...) : Dizi veya nesne elemanlarını tek tek açarak kopyalama veya birleştirme işlemi yapar.
+- Rest Parametresi (...) : Fonksiyona gelen sınırsız parametreyi tek bir dizi içinde toplar.
+- map()                  : Bir diziyi döngüye alıp her elemanı değiştirerek yeni dizi üretme metodu.
+- filter()               : Diziyi belirli bir koşula göre süzüp alt dizi çıkarma metodu.
+
+=========================================
+TEMEL UYGULAMA VE PRATİK KAZANIMLARI
+=========================================
+
+1. DEĞİŞKEN VE OK FONKSİYONU DENEYLERİ:
+- `let`, `const` ve `var` kapsam çakışmaları analiz edildi (`index1.html`).
+- Klasik zamanlayıcıda `this` sorunu ve ok fonksiyonuyla bu sorunun çözümü sağlandı (`index2.html`).
+
+2. NESNE PARÇALAMA VE REFERANS KONTROLÜ:
+- Destructuring ve alias kullanımı test edildi (`index3.html`).
+- Spread operatörüyle dizilerin birbirini bozmadan kopyalanması sağlandı (`index4.html`).
+- Rest parametresiyle dinamik argüman toplayan fonksiyonlar yazıldı (`index5.html`).
+
+3. BOOTSTRAP VE DİNAMİK LİSTE FİLTRELEME:
+- Bootstrap 5.3 ile modern bir admin paneli arayüzü kuruldu (`bootstrap.html`).
+- Ürünlerin arama kelimesi ve fiyata göre anlık filtrelenip ekranda güncellendiği uygulama geliştirildi (`index6.html`).
+
+=========================================
+PROJEDE KULLANILAN METOT VE OPERATÖRLERİN AÇIKLAMALARI
+=========================================
+
+- **dizi.filter:** Koşula uyan elemanları ayıklayarak yeni dizi döner.
+  *Kullanımı:* Arama kutusuna yazılan kelimeyi içeren ürünleri süzmek için.
+
+- **dizi.map:** Dizi elemanlarını HTML string yapısına dönüştürür.
+  *Kullanımı:* Süzülen ürünleri `<li>` veya `<div>` etiketlerine dönüştürmek için.
+
+- **Spread (...):** Nesneleri veya dizileri açarak yeni referanslar oluşturur.
+  *Kullanımı:* Orijinal dizi referansını koruyarak güvenli kopyalar alırken.
+
+- **Destructuring:** Nesne öğelerini değişken adlarıyla eşleştirip ayıklar.
+  *Kullanımı:* `const { marka, fiyat } = urun;` satırında marka ve fiyata hızlı erişim sağlar.
