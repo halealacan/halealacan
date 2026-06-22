@@ -2,7 +2,8 @@
 // ProductGrid içerisinden gönderilen tek bir ürünü alır.
 export default function ProductCard({
 
-    product // Tek bir ürün objesi
+    product,
+    onAddToCart // Tek bir ürün objesi
 
 }) {
 
@@ -70,7 +71,9 @@ export default function ProductCard({
                     </span>
 
                     {/* Sepete ekleme butonu */}
-                    <button className="product-btn">
+                    <button className="product-btn" 
+                    onClick={()=>onAddToCart(product)} 
+                    >
 
                         <span>+</span>
 
