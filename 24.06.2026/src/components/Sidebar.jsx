@@ -1,6 +1,9 @@
 import React from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { setActiveTab, logout } from "../store/authSlice";
 
 export default function Sidebar() {
+    const dispatch=useDispatch();
   return (
     <aside className="sidebar-container">
       <div>

@@ -52,62 +52,63 @@ const productSlice = createSlice({
       reducer: (state, action) => {
         state.list.push(action.payload);
       },
-    prepare: (product) => {
+      prepare: (product) => {
         const categoryAbbr = (product.category || "GEN")
-          .substring(0,3)
+          .substring(0, 3)
           .toUpperCase();
         const randomNum = Math.floor(100 + Math.random() * 900);
         const sku = `SKU-${randomNum}-${categoryAbbr}`;
-        let iconType="box" 
-        if(product.category==='Bilgisayar')iconType='desktop';
-        else if (product.category=== "Telefon") iconType="phone";
-        else if (product.category ==="Aksesuar") iconType="mouse";
+        let iconType = "box";
+        if (product.category === "Bilgisayar") iconType = "desktop";
+        else if (product.category === "Telefon") iconType = "phone";
+        else if (product.category === "Aksesuar") iconType = "mouse";
         return {
-            payload:{
-                id: Date.now(),
-                sku,
-                iconType,
-                ...product,
-                price: parseFloat(product.price) || 0,
-            },
+          payload: {
+            id: Date.now(),
+            sku,
+            iconType,
+            ...product,
+            price: parseFloat(product.price) || 0,
+          },
         };
+      },
     },
-    },
-    deleteProduct: (state,action) => {
-        state.list = state.list.filter((p)=>p.id !==. action.payload);
+    deleteProduct: (state, action) => {
+      state.list = state.list.filter((p) => p.id !== action.payload);
     },
     addCategory: (state, action) => {
-        if (!state.categories.includes(action.payload)) {
-            state.categories.push(action.payload);
-        }
+      if (!state.categories.includes(action.payload)) {
+        state.categories.push(action.payload);
+      }
     },
-    setSelectedCategory: (state,action) => {
-        state.selectedCategory=action.payload;
+    setSelectedCategory: (state, action) => {
+      state.selectedCategory = action.payload;
     },
     editProduct: (state, action) => {
       const index = state.list.findIndex((p) => p.id === action.payload.id);
       if (index !== -1) {
-        let iconType="box"
-        if(action.payload.category==="Bilgisayar") iconType="desktop"
-            else if(action.payload.category === "Telefon") iconType= "phone";
-            else if (action.payload.category === "Aksesuar") iconType= "mouse";
-            state.list[index]={
-                ...state.list[index],
-                ...action.payload,
-                iconType,
-                price: parseFloat(action.payload.price) || 0,
-            };
+        let iconType = "box";
+        if (action.payload.category === "Bilgisayar") iconType = "desktop";
+        else if (action.payload.category === "Telefon") iconType = "phone";
+        else if (action.payload.category === "Aksesuar") iconType = "mouse";
+        state.list[index] = {
+          ...state.list[index],
+          ...action.payload,
+          iconType,
+          price: parseFloat(action.payload.price) || 0,
+        };
       }
       state.selectedProduct = null;
     },
-    setSelectedProduct: (state,action) => {
-        state.selectedProduct=action.payload;
+    setSelectedProduct: (state, action) => {
+      state.selectedProduct = action.payload;
     },
     clearSelectedProduct: (state) => {
-        state.selectedProduct =null;
+      state.selectedProduct = null;
     },
-   },
+  },
 });
+
 export const {
   addProduct,
   deleteProduct,
@@ -118,4 +119,3 @@ export const {
   clearSelectedProduct,
 } = productSlice.actions;
 export default productSlice.reducer;
-
