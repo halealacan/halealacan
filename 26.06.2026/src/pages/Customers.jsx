@@ -10,10 +10,10 @@ import {
 
 export default function Customers() {
   const dispatch = useDispatch()
-  const customerList = useSelector((state) => state.customers.list)
+  const customerList = useSelector((state) => state.customers.list) //secmemizi sagliyorn
   const selectedCustomer = useSelector((state) => state.customers.selectedCustomer)
   const fetchStatus = useSelector((state) => state.customers.status)
-  const actionStatus = useSelector((state) => state.customers.actionStatus)
+  const actionStatus = useSelector((state) => state.customers.actionStatus) 
 
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
@@ -22,6 +22,7 @@ export default function Customers() {
   const [status, setStatus] = useState('Aktif')
 
   const [customerToDelete, setCustomerToDelete] = useState(null)
+  //secilen müşteriiy silmek için kullanılır. customerToDelete state'i, silme işlemi için seçilen müşteriyi tutar. Eğer bir müşteri silinmek üzere seçilmişse, bu state o müşterinin bilgilerini içerir ve silme onay dialogu gösterilir.
 
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
