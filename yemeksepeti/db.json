@@ -1,0 +1,220 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "admin@yemeksepeti.com",
+      "password": "adminpassword",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "store1",
+      "email": "store@yemeksepeti.com",
+      "password": "storepassword",
+      "role": "store"
+    },
+    {
+      "id": "3",
+      "username": "user1",
+      "email": "user@yemeksepeti.com",
+      "password": "userpassword",
+      "role": "user"
+    },
+    {
+      "id": "4",
+      "username": "pizza_owner",
+      "email": "pizza@yemeksepeti.com",
+      "password": "storepassword",
+      "role": "store"
+    },
+    {
+      "id": "5",
+      "username": "doner_owner",
+      "email": "doner@yemeksepeti.com",
+      "password": "storepassword",
+      "role": "store"
+    },
+    {
+      "id": "6",
+      "username": "tatli_owner",
+      "email": "tatli@yemeksepeti.com",
+      "password": "storepassword",
+      "role": "store"
+    }
+  ],
+  "restaurants": [
+    {
+      "id": "1",
+      "userId": 2,
+      "name": "Lezzet Burger",
+      "rating": 4.8,
+      "category": "Burger",
+      "address": "Kadıköy, İstanbul"
+    },
+    {
+      "id": "2",
+      "userId": 4,
+      "name": "Pizza Venezia",
+      "rating": 4.7,
+      "category": "Pizza",
+      "address": "Beşiktaş, İstanbul"
+    },
+    {
+      "id": "3",
+      "userId": 5,
+      "name": "Dürümcü Baba",
+      "rating": 4.6,
+      "category": "Döner",
+      "address": "Şişli, İstanbul"
+    },
+    {
+      "id": "4",
+      "userId": 6,
+      "name": "Tatlı Dünyası",
+      "rating": 4.9,
+      "category": "Tatlı",
+      "address": "Üsküdar, İstanbul"
+    }
+  ],
+  "foods": [
+    {
+      "id": "1",
+      "restaurantId": 1,
+      "name": "Klasik Burger Menü",
+      "price": 180,
+      "description": "Özel dana köfte, marul, turşu, domates ve sos ile patates kızartması eşliğinde."
+    },
+    {
+      "id": "2",
+      "restaurantId": 1,
+      "name": "Tavuklu Wrap",
+      "price": 140,
+      "description": "Marine edilmiş ızgara tavuk parçaları, kaşar peyniri, biber ve sos."
+    },
+    {
+      "id": "3",
+      "restaurantId": 1,
+      "name": "Çıtır Tavuk Kovası",
+      "price": 210,
+      "description": "12 adet çıtır tavuk parçası, patates kızartması ve 2 adet sos seçeneği."
+    },
+    {
+      "id": "4",
+      "restaurantId": 1,
+      "name": "Sufle",
+      "price": 75,
+      "description": "Akışkan çikolatalı sıcak sufle."
+    },
+    {
+      "id": "5",
+      "restaurantId": 2,
+      "name": "Margarita Pizza",
+      "price": 180,
+      "description": "Özel domates sosu, mozzarella peyniri, fesleğen ve zeytinyağı."
+    },
+    {
+      "id": "6",
+      "restaurantId": 2,
+      "name": "Karışık Pizza",
+      "price": 220,
+      "description": "Sucuk, salam, sosis, mısır, biber, mantar ve mozzarella peyniri."
+    },
+    {
+      "id": "7",
+      "restaurantId": 2,
+      "name": "Fırın Patates",
+      "price": 90,
+      "description": "Baharatlı çıtır fırın patates dilimleri."
+    },
+    {
+      "id": "8",
+      "restaurantId": 3,
+      "name": "Et Döner Dürüm",
+      "price": 160,
+      "description": "100g yaprak et döner, yeşillik ve sos ile lavaş içinde."
+    },
+    {
+      "id": "9",
+      "restaurantId": 3,
+      "name": "Tavuk Döner Dürüm",
+      "price": 120,
+      "description": "Özel soslu tavuk döner, patates kızartması ve turşu lavaş içinde."
+    },
+    {
+      "id": "10",
+      "restaurantId": 3,
+      "name": "İskender Kebap",
+      "price": 240,
+      "description": "Tereyağlı yaprak et döner, sos, tırnak pide ve süzme yoğurt ile."
+    },
+    {
+      "id": "11",
+      "restaurantId": 4,
+      "name": "Fıstıklı Baklava (4 Adet)",
+      "price": 130,
+      "description": "Antep fıstıklı çıtır baklava."
+    },
+    {
+      "id": "12",
+      "restaurantId": 4,
+      "name": "Sıcak Künefe",
+      "price": 140,
+      "description": "Özel peynirli sıcak şerbetli künefe."
+    },
+    {
+      "id": "13",
+      "restaurantId": 4,
+      "name": "Fırın Sütlaç",
+      "price": 85,
+      "description": "Üzeri kızarmış geleneksel fırın sütlaç."
+    },
+    {
+      "name": "pizza",
+      "description": "sosis,salam",
+      "price": 200,
+      "restaurantId": "1",
+      "id": "TJoF50w5FEw"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "restaurantId": 1,
+      "customerName": "Ahmet Yılmaz",
+      "items": "2x Klasik Burger Menü, 1x Sufle",
+      "total": 435,
+      "date": "2026-07-02 11:30",
+      "status": "Hazırlanıyor"
+    },
+    {
+      "id": "2",
+      "restaurantId": 1,
+      "customerName": "Ayşe Kaya",
+      "items": "1x Tavuklu Wrap, 1x Kola",
+      "total": 175,
+      "date": "2026-07-02 11:15",
+      "status": "Yolda"
+    },
+    {
+      "id": "3",
+      "restaurantId": 1,
+      "customerName": "Murat Demir",
+      "items": "1x Çıtır Tavuk Kovası",
+      "total": 210,
+      "date": "2026-07-02 10:45",
+      "status": "Teslim Edildi"
+    },
+    {
+      "restaurantId": 2,
+      "restaurantName": "Pizza Venezia",
+      "customerName": "user1",
+      "items": "1x Karışık Pizza",
+      "total": 245,
+      "date": "2026-07-02 09:17",
+      "status": "Hazırlanıyor",
+      "id": "5QNnirO12r0"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
